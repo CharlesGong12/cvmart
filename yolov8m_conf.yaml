@@ -1,0 +1,53 @@
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: /home  # dataset root dir
+train: images/train  # train images (relative to 'path') 4 images
+val: images/val  # val images (relative to 'path') 4 images
+test:  # test images (optional)
+
+# Classes (80 COCO classes)
+names:
+    0: no_u_turn
+    1: u_turn_allowed
+    2: bus_lane
+    3: motor_vehicle_lane
+    4: motor_vehicle_movement
+    5: combined_u_turn_and_left_turn_lane
+    6: u_turn_lane
+    7: combined_through_and_right_turn_lane
+    8: combined_through_and_left_turn_lane
+    9: through_lane
+    10: left_turn_lane
+    11: right_turn_lane
+    12: pedestrian_crossing
+    13: roundabout_traffic
+    14: drive_on_the_left_side_of_the_median_strip
+    15: drive_on_the_right_side_of_the_median_strip
+    16: turn_left_or_right
+    17: through_and_right_turn
+    18: through_and_left_turn
+    19: right_turn
+    20: left_turn
+    21: straight_ahead
+    22: restricted_parking_area_lifted
+    23: no_parking_area
+    24: long_term_parking_restriction_lifted
+    25: no_long_term_parking
+    26: no_parking
+    27: overtaking_allowed
+    28: no_overtaking
+    29: no_through_and_right_turn
+    30: no_through_and_left_turn
+    31: no_left_and_right_turn
+    32: no_through
+    33:  no_right_turn
+    34: no_left_turn
+    35: no_entry_for_freight_vehicles
+    36: no_entry_for_motor_vehicles
+    37: no_entry
+    38: no_passage
+    39: yield_to_oncoming_traffic
+    40: slow_down_and_yield
+    41: stop_and_yield
+    42: no_entry_for_vehicles_transporting_dangerous_goods
+    43: no_entry_for_large_passenger_vehicles
+    44: other
