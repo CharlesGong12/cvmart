@@ -3,7 +3,7 @@ import os
 import shutil
 os.environ['WANDB_DISABLED'] = 'true'
 
-model = YOLO('yolov8m.yaml').load('/project/train/models/yolov8m.pt')  # build from YAML and transfer weights
+model = YOLO('yolov8m.yaml').load('/project/train/models/yolov8m/train/weights/last.pt')  # build from YAML and transfer weights
 
 # Train the model
 results = model.train(data='/project/train/src_repo/yolov8m_conf.yaml',
@@ -12,15 +12,21 @@ results = model.train(data='/project/train/src_repo/yolov8m_conf.yaml',
  device='cuda:0',
  batch=-1, 
  optimizer='AdamW',
- lr0=1e-3,
+ lr0=1e-4,
  warmup_epochs=2,
  dropout=0.1,
  val=True,
  weight_decay=1e-5,
  resume=True,
- project='/project/train/models/yolov8m'   #save path
+ project='/project/train/models/yolov8m',   #save path
+ fliplr=0,
+ copy_paste=0.2,
+ degrees=3,
+ patience=5,
+ exist_ok=True
  )
 
+model.export(format='engine', device='cuda')
 
 # 找到具有最大后缀数字的文件夹
 # detect_folder = '/project/runs/detect'
