@@ -1,6 +1,10 @@
 import random
 import json
 from ultralytics import YOLO
+import subprocess
+import os
+import onnx
+import onnxruntime as ort
 
 model_class_names = ["no_u_turn",
 "u_turn_allowed",
@@ -52,17 +56,23 @@ model_class_names = ["no_u_turn",
 class YoloDetector:
     def __init__(self, model_path):
         self.model = YOLO(model_path)
+        # path_without_extension, extension = os.path.splitext(model_path)
+        # new_model_path = path_without_extension + '.engine'
+        # self.model = YOLO(new_model_path)
 
     def detect(self, input_image):
-        detections = self.model.predict(input_image, device='cuda', imgsz=[384,640])
+        detections = self.model.predict(input_image, device='cuda',imgsz=(384,640),half=True)
         return detections
 
 def init():
-    model = YoloDetector('/project/train/models/yolov8m/train/weights/last.engine')
+    # Set environment variables
+    # os.environ['LD_LIBRARY_PATH'] = '/opt/TensorRT-8.0.1.6/lib:' + os.environ.get('LD_LIBRARY_PATH', '')
+    # os.environ['LD_LIBRARY_PATH'] = '/opt/conda/lib/python3.7/site-packages/tensorrt:' + os.environ.get('LD_LIBRARY_PATH', '')
+    # os.environ['PATH'] = '/usr/local/cuda-11.3/bin:' + os.environ.get('PATH', '')
+    model = YoloDetector('/project/train/models/yolov8m/train3/weights/best.engine')
     return model
 
 def process_image(net, input_image, args=None):
-    
     detections = net.detect(input_image)   # list of 1 Results object
 
     # 处理检测结果
